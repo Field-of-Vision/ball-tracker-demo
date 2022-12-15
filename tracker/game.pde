@@ -43,11 +43,12 @@ public class GamePage extends Page {
     }
   }
 
+  // TODO: note that this was sending mouse/7 instead of mouse/15... need to change 15 to be a constant!!! This is the x coordinate being sent to AWS
   String toTautJson() {
     return "{\n\"Timestamp\":" +
       String.format("%.02f", timestamp) + ",\n\"X\":" +
-      mouseX/7 + ",\n\"Y\":" +
-      mouseY/7 + ",\n\"Possession\":" +
+      mouseX/15 + ",\n\"Y\":" +
+      mouseY/15 + ",\n\"Possession\":" +
       possession + ",\n\"Pass\":" +
       pass + ",\n\"Receive\":" +
       receive + ",\n\"home goal\":" +
@@ -63,8 +64,8 @@ public class GamePage extends Page {
 
     return "{\"action\": \"" + action + "\", \"message\": {\"Timestamp\":" +
       String.format("%.02f", timestamp) + ",\"X\":" +
-      mouseX/7 + ",\"Y\":" +
-      mouseY/7 + ",\"Possession\":" +
+      mouseX/15 + ",\"Y\":" +
+      mouseY/15 + ",\"Possession\":" +
       possession + ",\"Pass\":" +
       pass + ",\"Receive\":" +
       receive + ",\"home goal\":" +
@@ -73,8 +74,7 @@ public class GamePage extends Page {
       out + "}}";
   }
 
-  @Override
-    void show() {
+  void show() {
     super.show();
 
     textSize(20);
