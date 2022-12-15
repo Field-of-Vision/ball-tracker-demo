@@ -1,3 +1,5 @@
+import websockets.*;
+
 import controlP5.*;
 import java.awt.Robot;
 import processing.awt.PSurfaceAWT;
@@ -24,7 +26,7 @@ int windowY = 0;
 char lastKeyPressed = '\\';
 
 void settings() {
-  size(1505, 1176);
+  size(1530, 963);
 }
 
 void setup() {
@@ -49,7 +51,7 @@ void setup() {
   ball[1] = loadImage(dataPath(FIG_PATH) + File.separator + "AFLBall.png");
   ball[2] = loadImage(dataPath(FIG_PATH) + File.separator + "CricketBall.png");
 
-  images[0] = loadImage(dataPath(FIG_PATH) + File.separator + "Ireland.png");
+  images[0] = loadImage(dataPath(FIG_PATH) + File.separator + "PitchCorrect.png");
   images[1] = loadImage(dataPath(FIG_PATH) + File.separator + "Australia.png");
   images[2] = loadImage(dataPath(FIG_PATH) + File.separator + "Cricket.png");
 

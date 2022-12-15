@@ -11,14 +11,15 @@ void webConnect(String uri) {
     println("Already connected to <" + url + ">. Disconnect first.");
     return;
   }
-  
 
   url = uri;
-  println("We are here...");
-  println(uri);
-  println(this);
+  println("yo");
   wsc = new WebsocketClient(this, uri);
-  println("Now we are here...");
+  println("yo yo");
+  print("uri: ");
+  println(uri);
+  print("this: ");
+  println(this);
 }
 
 void webDisconnect() {
