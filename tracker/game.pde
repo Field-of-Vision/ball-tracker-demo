@@ -32,7 +32,7 @@ public class GamePage extends Page {
 
     switch(url) {
     case DALYMOUNT_PARK:
-      this.action = "irelandSendMessage";
+      this.action = "dalymount_IRL_sendMessage";
       break;
     case MARVEL_STADIUM:
       this.action = "marvel_AUS_sendMessage";
