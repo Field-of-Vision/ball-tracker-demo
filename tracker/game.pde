@@ -91,9 +91,9 @@ public class GamePage extends Page {
     //when mouse is pressed, the ellipse gets bigger for a split second
 
     if (possession == POSSESSION_HOME) {
-      stroke(0, 0, 205);
+      stroke(255, 0, 0);
     } else if (possession == POSSESSION_AWAY) {
-      stroke(255, 173, 0);
+      stroke(0, 100, 0);
     } else {
       stroke(255);
     }

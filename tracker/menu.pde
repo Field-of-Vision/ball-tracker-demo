@@ -8,7 +8,7 @@ public class MainPage extends Page {
   static final String LIST_LABEL = "Stadium Selector:";
   
   String[] stadiums = {
-    "Dalymount Park",
+    "Khalifa International Stadium",
     "Marvel Stadium",
     "Melbourne Cricket Ground",
     "Ethiad Stadium",
