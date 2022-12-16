@@ -45,16 +45,14 @@ public class GamePage extends Page {
 
   // TODO: note that this was sending mouse/7 instead of mouse/15... need to change 15 to be a constant!!! This is the x coordinate being sent to AWS
   String toTautJson() {
-    return "{\n\"Timestamp\":" +
+    return "{\n\"T\":" +
       String.format("%.02f", timestamp) + ",\n\"X\":" +
       mouseX/15 + ",\n\"Y\":" +
-      mouseY/15 + ",\n\"Possession\":" +
-      possession + ",\n\"Pass\":" +
-      pass + ",\n\"Receive\":" +
-      receive + ",\n\"home goal\":" +
-      home + ",\n\"away goal\":" +
-      away + ",\n\"Out\":" +
-      out + "\n}";
+      mouseY/15 + ",\n\"P\":" +
+      possession + ",\n\"Pa\":" +
+      pass + ",\n\"H\":" +
+      home + ",\n\"A\":" +
+      away + "\n}";
   }
 
   String toJsonRequest() {
@@ -62,16 +60,14 @@ public class GamePage extends Page {
       println("Can't send message to the server before setting the stadium");
     }
 
-    return "{\"action\": \"" + action + "\", \"message\": {\"Timestamp\":" +
+    return "{\"action\": \"" + action + "\", \"message\": {\"T\":" +
       String.format("%.02f", timestamp) + ",\"X\":" +
       mouseX/15 + ",\"Y\":" +
-      mouseY/15 + ",\"Possession\":" +
-      possession + ",\"Pass\":" +
-      pass + ",\"Receive\":" +
-      receive + ",\"home goal\":" +
-      home + ",\"away goal\":" +
-      away + ",\"Out\":" +
-      out + "}}";
+      mouseY/15 + ",\"P\":" +
+      possession + ",\"Pa\":" +
+      pass + ",\"H\":" +
+      home + ",\"A\":" +
+      away + "}}";
   }
 
   void show() {
