@@ -7,6 +7,7 @@ import processing.awt.PSurfaceAWT.SmoothCanvas;
 
 ControlP5 controlP5;
 ControlP5 cp5;
+PImage img;
 PImage[] images = new PImage[3];
 PImage[] ball = new PImage[3];
 PImage paused;
@@ -23,10 +24,13 @@ SmoothCanvas canvas;
 int windowX = 0;
 int windowY = 0;
 
+int appWidth = 1530; // Default is 1530 
+int appHeight = 963; // Defauly is 963 
+
 char lastKeyPressed = '\\';
 
 void settings() {
-  size(1530, 963);
+  size(appWidth, appHeight);
 }
 
 void setup() {
@@ -54,6 +58,7 @@ void setup() {
   images[0] = loadImage(dataPath(FIG_PATH) + File.separator + "PitchCorrect.png");
   images[1] = loadImage(dataPath(FIG_PATH) + File.separator + "Australia.png");
   images[2] = loadImage(dataPath(FIG_PATH) + File.separator + "Cricket.png");
+
 
   paused = loadImage(dataPath(FIG_PATH) + File.separator + "Pause.png");
   goal = loadImage(dataPath(FIG_PATH) + File.separator + "goal.gif");

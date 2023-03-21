@@ -1,3 +1,5 @@
+final int MILLI_SEC_DELAY = 250;
+
 enum State {
   PAUSED, ONGOING, FINISHED;
 }
@@ -33,6 +35,7 @@ public class GamePage extends Page {
     switch(url) {
     case DALYMOUNT_PARK:
       this.action = "dalymount_IRL_sendMessage";
+      println("dalymount_IRL_sendMessage");
       break;
     case MARVEL_STADIUM:
       this.action = "marvel_AUS_sendMessage";
@@ -137,11 +140,11 @@ public class GamePage extends Page {
       image(paused, width/2+17, height/2, 1200, 750);
     }
 
-    //Everything within this if statement occurs every 0.125 seconds and sends the information to the AWS server.
+    //Everything within this if statement occurs every n seconds and sends the information to the AWS server.
     int clock = millis();
-    if (state == State.ONGOING && clock > time + 125) {
+    if (state == State.ONGOING && clock > time + MILLI_SEC_DELAY) {
 
-      // Iterate timestamp by 0.125 seconds.
+      // Iterate timestamp by MILLI_SEC_DELAY = 500; seconds.
       float elapsed = clock - time;
       println("Elapsed time since last request: " + elapsed);
 
