@@ -12,7 +12,7 @@ PImage[] images = new PImage[3];
 PImage[] ball = new PImage[3];
 PImage paused;
 Robot robot;
-PImage goal;
+PImage goal_img;
 
 GamePage game;
 MainPage menu;
@@ -61,7 +61,7 @@ void setup() {
 
 
   paused = loadImage(dataPath(FIG_PATH) + File.separator + "Pause.png");
-  goal = loadImage(dataPath(FIG_PATH) + File.separator + "goal.gif");
+  goal_img = loadImage(dataPath(FIG_PATH) + File.separator + "goal.gif");
 
   frameRate(60);
   webSetup();

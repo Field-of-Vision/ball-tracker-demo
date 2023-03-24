@@ -8,7 +8,7 @@ public class GamePage extends Page {
   int time;
   double timestamp;
   double checkpoint;
-  int pass, receive, home, away, out, possession, goal;
+  int pass, receive, home, away, out, possession;
   String action, stadium, url;
   int selectedImage;
   State state;
@@ -18,7 +18,7 @@ public class GamePage extends Page {
     time = millis();
     pass = 0;
     receive = 0;
-    goal = 0;
+    home = 0;
     away = 0;
     out = 0;
     possession = POSSESSION_NEUTRAL;
@@ -53,9 +53,9 @@ public class GamePage extends Page {
       mouseX/15 + ",\n\"Y\":" +
       mouseY/15 + ",\n\"P\":" +
       possession + ",\n\"Pa\":" +
-      pass + ",\n\"G\":" +
-      goal + ",\n\"R\":" +
-      receive + "\n}";
+      pass + ",\n\"H\":" +
+      home + ",\n\"A\":" +
+      away + "\n}";
   }
 
   String toJsonRequest() {
@@ -68,9 +68,9 @@ public class GamePage extends Page {
       mouseX/15 + ",\"Y\":" +
       mouseY/15 + ",\"P\":" +
       possession + ",\"Pa\":" +
-      pass + ",\"G\":" +
-      goal + ",\"R\":" +
-      receive + "}}";
+      pass + ",\"H\":" +
+      home + ",\"A\":" +
+      away + "}}";
   }
 
   void show() {
@@ -104,8 +104,12 @@ public class GamePage extends Page {
       ellipse(mouseX, mouseY, 20, 20);
     if (home == 1)
       //goal.gif is added to middle of screen
-      image(goal_img, (width/2)-300 , 300, 700, (height/2));
+      image(goal, (width/2)-300 , 300, 700, (height/2));
     
+
+
+
+
 
     int leftPad = 10;
     int leftPad1 = 1340;
@@ -114,7 +118,7 @@ public class GamePage extends Page {
     text("Hold Left Click - Possession", leftPad, 30);
     text("Press 'A' - Pass", leftPad, 55);
     text("Press '2' - Goal", leftPad, 130);
-    text("Press '3' - Receive", leftPad, 155);
+    text("Press '3' - Behind", leftPad, 155);
     text("Press 'Space' - Pause", leftPad, 180);
 
     // write output as text on screen for testing purposes.
@@ -123,8 +127,8 @@ public class GamePage extends Page {
     text("Y: " + mouseY/15, leftPad1, 80);
     text("Possession: " + possession, leftPad1, 105);
     text("Pass: " + pass, leftPad1, 130);
-    text("Goal: " + goal, leftPad1, 180);
-    text("Receive: " + receive, leftPad1, 205);
+    text("Goal: " + home, leftPad1, 180);
+    text("Behind: " + away, leftPad1, 205);
 
 
     if (state == State.PAUSED) {
@@ -193,23 +197,34 @@ public class GamePage extends Page {
     }
 
     switch (k) {
+    case '1':
+      if (out == 0) {
+        out = 1;
+      }
+      break;
 
   // TODO: This is supposed to be for the goal, not home. 
     case '2':
-      if (goal == 0) {
-        goal = 1;
+      if (home == 0) {
+        home = 1;
       }
       break;
 
     case '3':
-      if (receive == 0) {
-        receive = 1;
+      if (away == 0) {
+        away = 1;
       }
       break;
 
     case 'A':
       if (pass == 0) {
         pass = 1;
+      }
+      break;
+
+    case 'D':
+      if (receive == 0) {
+        receive = 1;
       }
       break;
     }
@@ -258,9 +273,6 @@ public class GamePage extends Page {
     }
     if (out == 1) {
       out = 0;
-    }
-    if (goal == 1){
-      goal = 0;
     }
   }
 }
