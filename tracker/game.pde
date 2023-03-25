@@ -90,11 +90,11 @@ public class GamePage extends Page {
     //when mouse is pressed, the ellipse gets bigger for a split second
 
     if (possession == POSSESSION_HOME) {
-      stroke(255, 0, 0);
+      stroke(0, 65, 32); // set stroke color to Northern Ireland jersey color
     } else if (possession == POSSESSION_AWAY) {
-      stroke(0, 100, 0);
+      stroke(0, 56, 147); // set stroke color to Finald jersey color
     } else {
-      stroke(255);
+      stroke(255); // default stroke color
     }
 
     //if pass, goal, or out is pressed, the ellipse gets bigger for a split second
@@ -104,18 +104,19 @@ public class GamePage extends Page {
       ellipse(mouseX, mouseY, 20, 20);
     if (home == 1)
       //goal.gif is added to middle of screen
-      image(goal_img, (width/2)-300 , 300, 700, (height/2));
-    
+      image(goal_img, (width/2)-300, 300, 700, (height/2));
+
 
     int leftPad = 10;
     int leftPad1 = 1340;
 
     //Instructions on screen
-    text("Hold Left Click - Possession", leftPad, 30);
-    text("Press 'A' - Pass", leftPad, 55);
-    text("Press '2' - Goal", leftPad, 130);
-    text("Press '3' - Receive", leftPad, 155);
-    text("Press 'Space' - Pause", leftPad, 180);
+    text("Hold Left Click - Possession NI", leftPad, 30);
+    text("Hold Right Click - Possession Finland", leftPad, 55);
+    text("Press 'A' - Pass", leftPad, 80);
+    text("Press 'D' - Receive", leftPad, 105);
+    text("Press '1' - Goal", leftPad, 130);
+    //text("Press 'Space' - Pause", leftPad, 155);
 
     // write output as text on screen for testing purposes.
     text("Timestamp: " + String.format("%.02f", timestamp), leftPad1, 30);
@@ -194,14 +195,14 @@ public class GamePage extends Page {
 
     switch (k) {
 
-  // TODO: This is supposed to be for the goal, not home. 
-    case '2':
+      // TODO: This is supposed to be for the goal, not home. 
+    case '1':
       if (goal == 0) {
         goal = 1;
       }
       break;
 
-    case '3':
+    case 'D':
       if (receive == 0) {
         receive = 1;
       }
@@ -259,7 +260,7 @@ public class GamePage extends Page {
     if (out == 1) {
       out = 0;
     }
-    if (goal == 1){
+    if (goal == 1) {
       goal = 0;
     }
   }
