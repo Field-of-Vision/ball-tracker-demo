@@ -53,7 +53,7 @@ public class GamePage extends Page {
       mouseY/15 + ",\n\"P\":" +
       possession + ",\n\"Pa\":" +
       pass + ",\n\"G\":" +
-      goal + ",\n\"R\":" +
+      goal + 
       "\n}";
   }
 
@@ -68,8 +68,7 @@ public class GamePage extends Page {
       mouseY/15 + ",\"P\":" +
       possession + ",\"Pa\":" +
       pass + ",\"G\":" +
-      goal + ",\"R\":" +
-      "}}";
+      goal + "}}";
   }
 
   void show() {
