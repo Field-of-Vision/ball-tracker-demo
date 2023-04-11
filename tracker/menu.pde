@@ -8,10 +8,10 @@ public class MainPage extends Page {
   static final String LIST_LABEL = "Stadium Selector:";
   
   String[] stadiums = {
-    "Windsor Park",
+    "Etihad Stadium",
     "Marvel Stadium",
     "Melbourne Cricket Ground",
-    "Ethiad Stadium",
+    "Windsor Park",
     "Wembley Stadium",
     "Estádio do Dragão"
   };
