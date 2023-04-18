@@ -8,7 +8,7 @@ public class GamePage extends Page {
   int time;
   double timestamp;
   double checkpoint;
-  int pass, home, away, out, possession, goal;
+  int pass, home, away, out, possession, goal, tutorial;
   String action, stadium, url;
   int selectedImage;
   State state;
@@ -20,6 +20,7 @@ public class GamePage extends Page {
     goal = 0;
     away = 0;
     out = 0;
+    tutorial = 0;
     possession = POSSESSION_NEUTRAL;
     timestamp = 0;
     checkpoint = 0;
@@ -53,7 +54,8 @@ public class GamePage extends Page {
       mouseY/15 + ",\n\"P\":" +
       possession + ",\n\"Pa\":" +
       pass + ",\n\"G\":" +
-      goal + 
+      goal + ",\n\"T\":" +
+      tutorial +
       "\n}";
   }
 
@@ -68,7 +70,8 @@ public class GamePage extends Page {
       mouseY/15 + ",\"P\":" +
       possession + ",\"Pa\":" +
       pass + ",\"G\":" +
-      goal + "}}";
+      goal + ",\n\"T\":" +
+      tutorial + "}}";
   }
 
   void show() {
@@ -111,6 +114,9 @@ public class GamePage extends Page {
     text("Right Click - Possession Away Team", leftPad, 55);
     text("Press 'A' - Pass", leftPad, 80);
     text("Press '1' - Goal", leftPad, 105);
+    text("Press 'J' - T1", leftPad, 130);
+    text("Press 'K' - T2", leftPad, 155);
+    text("Press 'L' - T3", leftPad, 180);
     //text("Press 'Space' - Pause", leftPad, 155);
 
     // write output as text on screen for testing purposes.
@@ -202,6 +208,24 @@ public class GamePage extends Page {
       }
       break;
 
+    case 'J':
+      if (tutorial == 0) {
+        tutorial = 1;
+      }
+      break;
+    
+    case 'K':
+      if (tutorial == 0) {
+        tutorial = 2;
+      }
+      break;
+    
+    case 'L':
+      if (tutorial == 0) {
+        tutorial = 3;
+      }
+      break;
+
     }
 
     
@@ -250,6 +274,9 @@ public class GamePage extends Page {
     }
     if (goal == 1) {
       goal = 0;
+    }
+    if (tutorial != 0) {
+      tutorial = 0;
     }
   }
 }

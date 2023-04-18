@@ -17,11 +17,7 @@
 
 ### Controls
 
-* A - Pass
-* 2 - Home goal
-* 3 - Away goal
-* Hold left click - Home ball pocession
-* Hold right click - Away ball pocession
+* J, K, L for Audio Tutorial for devices 1, 2, and 3 respectively
 
 ### Dependencies
 
