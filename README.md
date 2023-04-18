@@ -18,7 +18,6 @@
 ### Controls
 
 * A - Pass
-* 1 - Ball out
 * 2 - Home goal
 * 3 - Away goal
 * Hold left click - Home ball pocession
