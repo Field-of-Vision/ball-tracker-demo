@@ -132,9 +132,6 @@ public class MainPage extends Page {
     case 2:
       goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
       break;
-    case 3:
-      goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
-      break;
     default:
       println("Goal not handled <" + goalName + ">");
       return;

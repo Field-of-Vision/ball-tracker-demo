@@ -61,7 +61,6 @@ void setup() {
   images[1] = loadImage(dataPath(FIG_PATH) + File.separator + "Australia.png");
   images[2] = loadImage(dataPath(FIG_PATH) + File.separator + "Cricket.png");
 
-
   paused = loadImage(dataPath(FIG_PATH) + File.separator + "Pause.png");
   goal_img = loadImage(dataPath(FIG_PATH) + File.separator + "goal.gif");
 
@@ -85,13 +84,14 @@ void controlEvent(ControlEvent theEvent) {
    */
 
   // TODO: David's code... its messy but should work for selecting the goal page
-  // if (theEvent.isAssignableFrom(ListBox.class)) {
-  //   if (theEvent.getName().equals("Goal Selector:")) {
-  //     int selectedGoal = (int) theEvent.getValue();
-  //     menu.onClickGoalList(selectedGoal);
-  //     visible = goal; // set the visible page to the goal page
-  //   }
-  // }
+  // This sets the visible var to the Goal Page 
+  if (theEvent.isAssignableFrom(ListBox.class)) {
+    if (theEvent.getName().equals("Goal Selector:")) {
+      int selectedGoal = (int) theEvent.getValue();
+      menu.onClickGoalList(selectedGoal);
+      visible = goal; // set the visible page to the goal page
+    }
+  }
 
   if (!theEvent.isController()) { 
     return;
@@ -122,6 +122,8 @@ void controlEvent(ControlEvent theEvent) {
       }
 
       int selectedGoal= (int) cp5.getController(MainPage.GOAL_LIST_LABEL).getValue();
+      print("SelectedGoal: ");
+      println(selectedGoal);
       menu.onClickGoalList(selectedGoal);
       return;
 

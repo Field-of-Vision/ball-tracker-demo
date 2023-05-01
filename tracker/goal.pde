@@ -27,7 +27,7 @@ public class GoalPage extends Page {
     switch(url) {
     case DALYMOUNT_PARK:
       this.action = "dalymount_IRL_sendMessage";
-      println("dalymount_IRL_sendMessage");
+      println("goalPage: dalymount_IRL_sendMessage");
       break;
     case MARVEL_STADIUM:
       this.action = "marvel_AUS_sendMessage";
