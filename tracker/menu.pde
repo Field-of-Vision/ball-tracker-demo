@@ -1,18 +1,34 @@
 public class MainPage extends Page {
   Button start;
   Button login;
-  ListBox list;
-  
+  ListBox stadium_list;
+  ListBox goal_list;
+
+  // UI constants
+  int listBoxHeight = 280;
+  int listBoxWidth = 500;
+  int spaceBetweenMenus = 50;
+  int startingX = (1541 - (2 * listBoxWidth) - spaceBetweenMenus) / 2;
+
+
   static final String START_LABEL = "Start";
   static final String LOGIN_LABEL = "Logon";
-  static final String LIST_LABEL = "Stadium Selector:";
-  
+  static final String STADIUM_LIST_LABEL = "Stadium Selector:";
+  static final String GOAL_LIST_LABEL = "Goal Selector:";
+
+  //Goal strings
+  String[] goals = {
+    "Goal 1", 
+    "Goal 2", 
+    "Goal 3", 
+  };
+
   String[] stadiums = {
-    "Etihad Stadium",
-    "Marvel Stadium",
-    "Melbourne Cricket Ground",
-    "Windsor Park",
-    "Wembley Stadium",
+    "Etihad Stadium", 
+    "Marvel Stadium", 
+    "Melbourne Cricket Ground", 
+    "Windsor Park", 
+    "Wembley Stadium", 
     "Estádio do Dragão"
   };
 
@@ -39,9 +55,9 @@ public class MainPage extends Page {
       .setLabel("Login")
       .setFont(font);
 
-    list = cp5.addListBox(LIST_LABEL)
-      .setPosition((1541/2)-500, 380)
-      .setSize(1000, 280)
+    stadium_list = cp5.addListBox(STADIUM_LIST_LABEL)
+      .setPosition(startingX, 380)
+      .setSize(listBoxWidth, listBoxHeight)
       .setBarVisible(false)
       .setColorBackground(color(33, 33, 33))
       .setColorForeground(color(48, 48, 48))
@@ -50,16 +66,42 @@ public class MainPage extends Page {
       .setFont(font)
       .addItems(stadiums);
 
+    goal_list = cp5.addListBox(GOAL_LIST_LABEL)
+      .setPosition(startingX + listBoxWidth + spaceBetweenMenus, 380)
+      .setSize(listBoxWidth, listBoxHeight)
+      .setBarVisible(false)
+      .setColorBackground(color(33, 33, 33))
+      .setColorForeground(color(48, 48, 48))
+      .setColorActive(color(79, 79, 79))
+      .setItemHeight(70)
+      .setFont(font)
+      .addItems(goals);  
+
     controllers.add(login);
     controllers.add(start);
-    controllers.add(list);
+    controllers.add(stadium_list);
+    controllers.add(goal_list);
   }
 
   void onClickStart() {
-    game.start();
+    int selectedStadiumList = (int) cp5.getController(MainPage.STADIUM_LIST_LABEL).getValue();
+    int selectedGoalList = (int) cp5.getController(MainPage.GOAL_LIST_LABEL).getValue();
+
+    if (selectedStadiumList >= 0) {
+      game.start();
+      goal.hide();
+      visible = game;
+    } else if (selectedGoalList >= 0) {
+      goal.start();
+      game.hide();
+      visible = goal;
+    }
+    return;
   }
-  
-  void onClickList(int selectedStadium) {
+
+
+
+  void onClickStadiumList(int selectedStadium) {
     String stadiumName = stadiums[selectedStadium];
     switch (selectedStadium) {
     case 0:
@@ -73,6 +115,28 @@ public class MainPage extends Page {
       break;
     default:
       println("Stadium not handled <" + stadiumName + ">");
+      return;
+    }
+  }
+
+  void onClickGoalList(int selectedGoal) {
+    println("Goal selected: " + selectedGoal);
+    String goalName = goals[selectedGoal];
+    switch (selectedGoal) {
+    case 0:
+      goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
+      break;
+    case 1:
+      goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
+      break;
+    case 2:
+      goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
+      break;
+    case 3:
+      goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
+      break;
+    default:
+      println("Goal not handled <" + goalName + ">");
       return;
     }
   }
