@@ -1,3 +1,5 @@
+import processing.data.JSONObject;
+
 public class GoalPage extends Page {
   int time;
   State state;
@@ -7,12 +9,23 @@ public class GoalPage extends Page {
   int pass, home, away, out, possession, goal, tutorial;
   int selectedImage;
 
+  int counter, json_array_size;
+  String json_filename;
+  JSONObject json_file;
+  JSONArray json_array;
+  JSONObject json_object;
+
   String temp;
 
   GoalPage() {
     time = millis();
     timestamp = 0;
     selectedImage = -1;
+    counter = 0;
+    json_filename = "data/randomSample.json";
+    json_file = loadJSONObject(json_filename);
+    json_array = json_file.getJSONArray("data");
+    json_array_size = json_array.size();
   }
     /**
     * Sets the AWS endpoint for the given goal
@@ -45,13 +58,40 @@ public class GoalPage extends Page {
       println("Can't send message to the server before setting the stadium");
     }
 
-    action = "hello";
-    mouseX = 0;
-    mouseY = 0;
-    possession = 1;
-    pass = 1;
-    goal = 1;
-    tutorial = 1;
+    // action = "hello";
+    // mouseX = 0;
+    // mouseY = 0;
+    // possession = 1;
+    // pass = 1;
+    // goal = 1;
+    // tutorial = 1;
+
+    if (counter >= json_array_size) {
+      // We have finished the goal. 
+      // TODO: need to return the homepage by hear. 
+      return "";
+    }
+    else{
+
+      // If the counter is 1, sleep/ delay for 15 seconds
+      if (counter == 1) {
+        println("delaying");
+        delay(5000);
+      }
+
+      json_object = json_array.getJSONObject(counter);
+
+      // Access the data fields
+      int x = json_object.getInt("X");
+      int y = json_object.getInt("Y");
+      int p = json_object.getInt("P");
+      int pa = json_object.getInt("Pa");
+      int g = json_object.getInt("G");
+
+      println(x);
+
+      counter++;
+    }
 
     // Temporarily commenting out just to see if I can hardcode something 
     // TODO: rename action to lambda_function or similar (its dalymount_IRL_sendMessage for example atm)
