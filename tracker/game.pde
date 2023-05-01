@@ -26,7 +26,13 @@ public class GamePage extends Page {
     checkpoint = 0;
     selectedImage = -1;
   }
-
+    /**
+    * Sets the AWS endpoint for the given stadium
+    * 
+    * @param url: the AWS endpoint
+    * @param goal: the stadium name 
+    * @selectedImage : the index of the image (team's logos) to be displayed
+    */
   void setStadium(String url, String stadium, int selectedImage) {
     this.url = url;
     this.stadium = stadium;
