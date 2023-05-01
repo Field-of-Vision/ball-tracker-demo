@@ -89,16 +89,6 @@ void controlEvent(ControlEvent theEvent) {
    distinguish which of the controllers has been changed.
    */
 
-  // TODO: David's code... its messy but should work for selecting the goal page
-  // This sets the visible var to the Goal Page 
-  // if (theEvent.isAssignableFrom(ListBox.class)) {
-  //   if (theEvent.getName().equals("Goal Selector:")) {
-  //     int selectedGoal = (int) theEvent.getValue();
-  //     menu.onClickGoalList(selectedGoal);
-  //     visible = goal; // set the visible page to the goal page
-  //   }
-  // }
-
   if (!theEvent.isController()) { 
     return;
   }
