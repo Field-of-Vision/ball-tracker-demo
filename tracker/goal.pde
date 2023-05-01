@@ -38,32 +38,29 @@ public class GoalPage extends Page {
     }
   }
 
-  // TODO: note that this was sending mouse/7 instead of mouse/15... need to change 15 to be a constant!!! This is the x coordinate being sent to AWS
-  String toTautJson() {
-    return "{\n\"T\":" +
-      String.format("%.02f", timestamp) + ",\n\"X\":" +
-      mouseX/15 + ",\n\"Y\":" +
-      mouseY/15 + ",\n\"P\":" +
-      possession + ",\n\"Pa\":" +
-      pass + ",\n\"G\":" +
-      goal + ",\n\"T\":" +
-      tutorial +
-      "\n}";
-  }
-
   String toJsonRequest() {
     if (action == null) {
       println("Can't send message to the server before setting the stadium");
     }
 
-    return "{\"action\": \"" + action + "\", \"message\": {\"T\":" +
-      String.format("%.02f", timestamp) + ",\"X\":" +
-      mouseX/15 + ",\"Y\":" +
-      mouseY/15 + ",\"P\":" +
-      possession + ",\"Pa\":" +
-      pass + ",\"G\":" +
-      goal + ",\n\"T\":" +
-      tutorial + "}}";
+    action = "hello";
+    mouseX = 0;
+    mouseY = 0;
+    possession = 1;
+    pass = 1;
+    goal = 1;
+    tutorial = 1;
+
+    // Temporarily commenting out just to see if I can hardcode something
+    // return "{\"action\": \"" + action + "\", \"message\": {\"T\":" +
+    //   String.format("%.02f", timestamp) + ",\"X\":" +
+    //   mouseX/15 + ",\"Y\":" +
+    //   mouseY/15 + ",\"P\":" +
+    //   possession + ",\"Pa\":" +
+    //   pass + ",\"G\":" +
+    //   goal + ",\n\"T\":" +
+    //   tutorial + "}}";
+    return "{\"action\" : \"yolo\", \"message\": {\"x\": \"3\"}}";
   }
 
   void show() {
@@ -84,7 +81,7 @@ public class GoalPage extends Page {
     text("Goal page", 10, 30);
 
     int clock = millis();
-    if (state == State.ONGOING && clock > time + MILLI_SEC_DELAY) {
+    if (clock > time + MILLI_SEC_DELAY) {
 
       // Iterate timestamp by MILLI_SEC_DELAY = 500; seconds.
       float elapsed = clock - time;
@@ -92,10 +89,8 @@ public class GoalPage extends Page {
 
       time = clock;
       timestamp = (float)time / 1000.0 - checkpoint;
-      println(toJsonRequest());
       webSendJson(toJsonRequest());
     }
-    println(toJsonRequest());
   }
 
   public void start() {

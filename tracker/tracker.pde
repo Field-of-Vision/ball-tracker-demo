@@ -27,6 +27,7 @@ int windowY = 0;
 
 int appWidth = 1530; // Default is 1530 
 int appHeight = 963; // Defauly is 963 
+String chosenList = "";  // Either STADIUM_LIST_LABEL or GOAL_LIST_LABEL
 
 char lastKeyPressed = '\\';
 
@@ -74,7 +75,12 @@ void draw() {
 
 //Print what the websocket server is sending to the console.
 void webSocketEvent(String msg) {
-  println(msg);
+  println("webSocketEvent: " + msg);
+}
+
+// This function will be called when the web socket client connects
+void webSocketConnectEvent() {
+  println("WebSocket client connected");
 }
 
 void controlEvent(ControlEvent theEvent) {
@@ -85,18 +91,21 @@ void controlEvent(ControlEvent theEvent) {
 
   // TODO: David's code... its messy but should work for selecting the goal page
   // This sets the visible var to the Goal Page 
-  if (theEvent.isAssignableFrom(ListBox.class)) {
-    if (theEvent.getName().equals("Goal Selector:")) {
-      int selectedGoal = (int) theEvent.getValue();
-      menu.onClickGoalList(selectedGoal);
-      visible = goal; // set the visible page to the goal page
-    }
-  }
+  // if (theEvent.isAssignableFrom(ListBox.class)) {
+  //   if (theEvent.getName().equals("Goal Selector:")) {
+  //     int selectedGoal = (int) theEvent.getValue();
+  //     menu.onClickGoalList(selectedGoal);
+  //     visible = goal; // set the visible page to the goal page
+  //   }
+  // }
 
   if (!theEvent.isController()) { 
     return;
   }
-  
+
+  println("getController().getName(): " + theEvent.getController().getName());
+  println("theEvent.getName(): " + theEvent.getName());
+
   switch(theEvent.getController().getName()) {
 
     case MainPage.LOGIN_LABEL:
@@ -113,15 +122,22 @@ void controlEvent(ControlEvent theEvent) {
       }
 
       int selectedStadium = (int) cp5.getController(MainPage.STADIUM_LIST_LABEL).getValue();
+      chosenList = MainPage.STADIUM_LIST_LABEL;
+
+      println("SelectedStadium: " + selectedStadium);
+
       menu.onClickStadiumList(selectedStadium);
       return;
 
+    // TODO: this isn't getting entered! why?
     case MainPage.GOAL_LIST_LABEL:
       if (visible != menu){
         return;
       }
 
       int selectedGoal= (int) cp5.getController(MainPage.GOAL_LIST_LABEL).getValue();
+      chosenList = MainPage.GOAL_LIST_LABEL;
+
       print("SelectedGoal: ");
       println(selectedGoal);
       menu.onClickGoalList(selectedGoal);
@@ -132,8 +148,17 @@ void controlEvent(ControlEvent theEvent) {
         return;
       }
 
-      menu.onClickStart();
-      visible = game;
+
+      if (chosenList == MainPage.STADIUM_LIST_LABEL) {
+        menu.onClickStartGame();
+        visible = game;
+      } else if (chosenList == MainPage.GOAL_LIST_LABEL) {
+        menu.onClickStartGoal();
+        visible = goal;
+      } else {
+        return;
+      }
+
 
       windowX = canvas.getFrame().getX();
       windowY = canvas.getFrame().getY();

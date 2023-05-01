@@ -83,20 +83,38 @@ public class MainPage extends Page {
     controllers.add(goal_list);
   }
 
-  void onClickStart() {
-    int selectedStadiumList = (int) cp5.getController(MainPage.STADIUM_LIST_LABEL).getValue();
-    int selectedGoalList = (int) cp5.getController(MainPage.GOAL_LIST_LABEL).getValue();
+  // TODO: this is the other main bug from david... I really should have just started right from the start, taken none of his code.
+  // Start is the event being passed... which enters this. Look at the conditions for the selected lists! WTF. Don't accept code if 
+  // you don't know what it does. 
+  // void onClickStart() {
+  //   int selectedStadiumList = (int) cp5.getController(MainPage.STADIUM_LIST_LABEL).getValue();
+  //   int selectedGoalList = (int) cp5.getController(MainPage.GOAL_LIST_LABEL).getValue();
 
-    if (selectedStadiumList >= 0) {
-      game.start();
-      goal.hide();
-      visible = game;
-    } else if (selectedGoalList >= 0) {
-      goal.start();
-      game.hide();
-      visible = goal;
-    }
-    return;
+  //   println("selectedStadiumList: " + selectedStadiumList);
+  //   println("selectedGoalList: " + selectedGoalList);
+
+  //   if (selectedStadiumList >= 0) {
+  //     println("starting game");
+  //     game.start();
+  //     goal.hide();
+  //     visible = game;
+  //   } else if (selectedGoalList >= 0) {
+  //     println("starting goal");
+  //     game.start();
+  //     game.hide();
+  //     visible = goal;
+  //   }
+  //   return;
+  // }
+
+  void onClickStartGame() {
+    game.start();
+    // goal.hide();
+  }
+
+  void onClickStartGoal() {
+    goal.start();
+    // game.hide();
   }
 
 
