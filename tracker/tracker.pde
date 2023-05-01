@@ -1,11 +1,9 @@
 import websockets.*;
-//109706
+
 import controlP5.*;
 import java.awt.Robot;
 import processing.awt.PSurfaceAWT;
 import processing.awt.PSurfaceAWT.SmoothCanvas;
-import processing.video.*;
-
 
 ControlP5 controlP5;
 ControlP5 cp5;
@@ -19,10 +17,8 @@ PImage goal_img;
 GamePage game;
 MainPage menu;
 LoginPage login;
-LeavePage leave;  
-GoalPage goal;
+LeavePage leave;
 Page visible;
-Movie movie;
 
 SmoothCanvas canvas;
 int windowX = 0;
@@ -40,11 +36,10 @@ void settings() {
 void setup() {
   cp5 = new ControlP5(this);
   canvas = (SmoothCanvas) ((PSurfaceAWT)surface).getNative();
-
+  
   try {
     robot = new Robot();
-  } 
-  catch (Exception e) {
+  } catch (Exception e) {
     println(e.getMessage());
   }
 
@@ -52,20 +47,17 @@ void setup() {
   menu = new MainPage();
   login = new LoginPage();
   leave = new LeavePage();
-  goal = new GoalPage();
 
-  addPages(game, menu, login, leave, goal);
+  addPages(game, menu, login, leave);
   visible = menu;
 
   ball[0] = loadImage(dataPath(FIG_PATH) + File.separator + "Soccer.png");
   ball[1] = loadImage(dataPath(FIG_PATH) + File.separator + "AFLBall.png");
   ball[2] = loadImage(dataPath(FIG_PATH) + File.separator + "CricketBall.png");
 
-
   images[0] = loadImage(dataPath(FIG_PATH) + File.separator + "PitchCorrect.png");
   images[1] = loadImage(dataPath(FIG_PATH) + File.separator + "Australia.png");
   images[2] = loadImage(dataPath(FIG_PATH) + File.separator + "Cricket.png");
-
 
 
   paused = loadImage(dataPath(FIG_PATH) + File.separator + "Pause.png");
@@ -89,79 +81,65 @@ void controlEvent(ControlEvent theEvent) {
    the controlEvent method. by checking the name of a controller one can 
    distinguish which of the controllers has been changed.
    */
-
-  if (theEvent.isAssignableFrom(ListBox.class)) {
-    if (theEvent.getName().equals("Goal Selector:")) {
-      int selectedGoal = (int) theEvent.getValue();
-      menu.onClickGoalList(selectedGoal);
-      visible = goal; // set the visible page to the goal page
-    }
-  }
-
   if (!theEvent.isController()) { 
     return;
   }
-
+  
   switch(theEvent.getController().getName()) {
-  case MainPage.LOGIN_LABEL:
-    if (visible != menu) {
+    case MainPage.LOGIN_LABEL:
+      if (visible != menu) {
+        return;
+      }
+      
+      visible = login;
       return;
-    }
+      
+    case MainPage.LIST_LABEL:
+      if (visible != menu) {
+        return;
+      }
 
-    visible = login;
-    return;
-
-  case MainPage.LIST_LABEL:
-    if (visible != menu) {
+      int selectedStadium = (int) cp5.getController(MainPage.LIST_LABEL).getValue();
+      menu.onClickList(selectedStadium);
       return;
-    }
 
-    int selectedStadium = (int) cp5.getController(MainPage.LIST_LABEL).getValue();
-    menu.onClickStadiumList(selectedStadium);
+    case MainPage.START_LABEL:
+      if (visible != menu) {
+        return;
+      }
 
-    //int selectedGoal = (int) cp5.getController(MainPage.LIST_LABEL).getValue();
-    //menu.onClickGoalList(selectedGoal);
-    return;
+      menu.onClickStart();
+      visible = game;
 
+      windowX = canvas.getFrame().getX();
+      windowY = canvas.getFrame().getY();
 
+      if (robot != null) {
+        // Java.AWT.Robot bug
+        // must move mouse to 0,0 or else it'll jump to a random location
+        robot.mouseMove(0, 0);
 
-  case MainPage.START_LABEL:
-    if (visible != menu) {
+        // this is a poor solution, for now
+        // if you move the window around, it will not work anymore
+        // I'm not sure what we need to get the mouse on the top left no matter where the window is
+        robot.mouseMove(windowX - 40, windowY);
+      }
+
       return;
-    }
 
-    menu.onClickStart();
+    case LeavePage.LEAVE_PAGE_YES_LABEL:
+      leave.onClickYes();
+      visible = menu;
+      return;
 
-
-    windowX = canvas.getFrame().getX();
-    windowY = canvas.getFrame().getY();
-
-    if (robot != null) {
-      // Java.AWT.Robot bug
-      // must move mouse to 0,0 or else it'll jump to a random location
-      robot.mouseMove(0, 0);
-
-      // this is a poor solution, for now
-      // if you move the window around, it will not work anymore
-      // I'm not sure what we need to get the mouse on the top left no matter where the window is
-      robot.mouseMove(windowX - 40, windowY);
-    }
-
-    return;
-
-  case LeavePage.LEAVE_PAGE_YES_LABEL:
-    leave.onClickYes();
-    visible = menu;
-    return;
-
-  case LeavePage.LEAVE_PAGE_NO_LABEL:
-    leave.onClickNo();
-    visible = game;
-    return;
-
-  case LoginPage.SUBMIT_LABEL:
-    login.onClickSubmit();
-    visible = menu;
-    return;
+    case LeavePage.LEAVE_PAGE_NO_LABEL:
+      leave.onClickNo();
+      visible = game;
+      return;
+    
+    case LoginPage.SUBMIT_LABEL:
+      login.onClickSubmit();
+      visible = menu;
+      return;
   }
 }

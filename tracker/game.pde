@@ -24,7 +24,7 @@ public class GamePage extends Page {
     possession = POSSESSION_NEUTRAL;
     timestamp = 0;
     checkpoint = 0;
-    selectedImage = 1;
+    selectedImage = -1;
   }
 
   void setStadium(String url, String stadium, int selectedImage) {
@@ -45,6 +45,7 @@ public class GamePage extends Page {
       break;
     }
   }
+
   // TODO: note that this was sending mouse/7 instead of mouse/15... need to change 15 to be a constant!!! This is the x coordinate being sent to AWS
   String toTautJson() {
     return "{\n\"T\":" +
@@ -79,12 +80,6 @@ public class GamePage extends Page {
     textSize(20);
 
     imageMode(CORNER);
-    
-    if (selectedImage < 0 || selectedImage >= images.length) {
-      println("Invalid selectedImage index: " + selectedImage);
-      return;
-    }
-    
     image(images[selectedImage], 0, 0, width, height);
     //imageMode(CENTER);
     //image(ball[selectedImage], mouseX, mouseY);
@@ -206,7 +201,7 @@ public class GamePage extends Page {
         goal = 1;
       }
       break;
-
+      
     case 'A':
       if (pass == 0) {
         pass = 1;
@@ -218,19 +213,23 @@ public class GamePage extends Page {
         tutorial = 1;
       }
       break;
-
+    
     case 'K':
       if (tutorial == 0) {
         tutorial = 2;
       }
       break;
-
+    
     case 'L':
       if (tutorial == 0) {
         tutorial = 3;
       }
       break;
+
     }
+
+    
+    
   }
 
   public void start() {
@@ -249,7 +248,7 @@ public class GamePage extends Page {
     if (!mousePressed) {
       return;
     }
-
+    
     if (mouseButton == LEFT) {
       possession = 1;
       return;
