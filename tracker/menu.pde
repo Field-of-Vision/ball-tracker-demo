@@ -119,25 +119,25 @@ public class MainPage extends Page {
     }
   }
 
-  void onClickGoalList(int selectedGoal) {
-    println("Goal selected: " + selectedGoal);
-    String goalName = goals[selectedGoal];
-    switch (selectedGoal) {
-    case 0:
-      goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
-      break;
-    case 1:
-      goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
-      break;
-    case 2:
-      goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
-      break;
-    case 3:
-      goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
-      break;
-    default:
-      println("Goal not handled <" + goalName + ">");
-      return;
-    }
-  }
+  // void onClickGoalList(int selectedGoal) {
+  //   println("Goal selected: " + selectedGoal);
+  //   String goalName = goals[selectedGoal];
+  //   switch (selectedGoal) {
+  //   case 0:
+  //     goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
+  //     break;
+  //   case 1:
+  //     goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
+  //     break;
+  //   case 2:
+  //     goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
+  //     break;
+  //   case 3:
+  //     goal.setGoal(DALYMOUNT_PARK, goalName, selectedGoal);
+  //     break;
+  //   default:
+  //     println("Goal not handled <" + goalName + ">");
+  //     return;
+  //   }
+  // }
 }
