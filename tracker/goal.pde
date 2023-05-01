@@ -92,7 +92,13 @@ public class GoalPage extends Page {
       pa = json_object.getInt("Pa");
       g = json_object.getInt("G");
 
-      println(x);
+      println("{\"action\": \"" + "dalymount_IRL_sendMessage" + "\", \"message\": {\"T\":" +
+      String.format("%.02f", timestamp) + ",\"X\":" +
+      x + ",\"Y\":" +
+      y + ",\"P\":" +
+      p + ",\"Pa\":" +
+      pa + ",\"G\":" +
+      g +  "}}");
 
       counter++;
     }
