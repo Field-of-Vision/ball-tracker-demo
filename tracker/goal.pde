@@ -7,6 +7,7 @@ public class GoalPage extends Page {
   double checkpoint;
   String action, goal_name, url;
   int pass, home, away, out, possession, goal, tutorial;
+  int t, x, y, p, pa, g;
   int selectedImage;
 
   int counter, json_array_size;
@@ -22,7 +23,7 @@ public class GoalPage extends Page {
     timestamp = 0;
     selectedImage = -1;
     counter = 0;
-    json_filename = "data/randomSample.json";
+    json_filename = "data/match1.json";
     json_file = loadJSONObject(json_filename);
     json_array = json_file.getJSONArray("data");
     json_array_size = json_array.size();
@@ -69,6 +70,8 @@ public class GoalPage extends Page {
     if (counter >= json_array_size) {
       // We have finished the goal. 
       // TODO: need to return the homepage by hear. 
+      println("We have finished");
+      game.finish();
       return "";
     }
     else{
@@ -82,11 +85,12 @@ public class GoalPage extends Page {
       json_object = json_array.getJSONObject(counter);
 
       // Access the data fields
-      int x = json_object.getInt("X");
-      int y = json_object.getInt("Y");
-      int p = json_object.getInt("P");
-      int pa = json_object.getInt("Pa");
-      int g = json_object.getInt("G");
+      t = json_object.getInt("T");
+      x = json_object.getInt("X");
+      y = json_object.getInt("Y");
+      p = json_object.getInt("P");
+      pa = json_object.getInt("Pa");
+      g = json_object.getInt("G");
 
       println(x);
 
@@ -96,7 +100,14 @@ public class GoalPage extends Page {
     // Temporarily commenting out just to see if I can hardcode something 
     // TODO: rename action to lambda_function or similar (its dalymount_IRL_sendMessage for example atm)
   
-    return "{\"action\" : \"dalymount_IRL_sendMessage\", \"message\": {\"x\": \"3\"}}";
+    // return "{\"action\" : \"dalymount_IRL_sendMessage\", \"message\": {\"x\": \"3\"}}";
+    return "{\"action\": \"" + "dalymount_IRL_sendMessage" + "\", \"message\": {\"T\":" +
+      String.format("%.02f", timestamp) + ",\"X\":" +
+      x + ",\"Y\":" +
+      y + ",\"P\":" +
+      p + ",\"Pa\":" +
+      pa + ",\"G\":" +
+      g +  "}}";
   }
 
   void show() {
