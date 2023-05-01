@@ -1,8 +1,8 @@
 public class MainPage extends Page {
   Button start;
   Button login;
-  ListBox list;
-  ListBox list1;
+  ListBox stadium_list;
+  ListBox goal_list;
   int listBoxHeight = 280;
   int listBoxWidth = 500;
   int spaceBetweenMenus = 50;
@@ -11,8 +11,8 @@ public class MainPage extends Page {
 
   static final String START_LABEL = "Start";
   static final String LOGIN_LABEL = "Logon";
-  static final String LIST_LABEL = "Stadium Selector:";
-  static final String GOAL_LABEL = "Goal Selector:";
+  static final String STADIUM_LIST_LABEL = "Stadium Selector:";
+  static final String GOAL_LIST_LABEL = "Goal Selector:";
 
   //Goal strings
   String[] goals = {
@@ -56,7 +56,7 @@ public class MainPage extends Page {
       .setLabel("Login")
       .setFont(font);
 
-    list = cp5.addListBox("Stadium Selector:")
+    stadium_list = cp5.addListBox(STADIUM_LIST_LABEL)
       .setPosition(startingX, 380)
       .setSize(listBoxWidth, listBoxHeight)
       .setBarVisible(false)
@@ -67,7 +67,7 @@ public class MainPage extends Page {
       .setFont(font)
       .addItems(stadiums);
 
-    list1 = cp5.addListBox("Goal Selector:")
+    goal_list = cp5.addListBox(GOAL_LIST_LABEL)
       .setPosition(startingX + listBoxWidth + spaceBetweenMenus, 380)
       .setSize(listBoxWidth, listBoxHeight)
       .setBarVisible(false)
@@ -80,13 +80,13 @@ public class MainPage extends Page {
 
     controllers.add(login);
     controllers.add(start);
-    controllers.add(list);
-    controllers.add(list1);
+    controllers.add(stadium_list);
+    controllers.add(goal_list);
   }
 
   void onClickStart() {
-    int selectedStadium1 = (int) cp5.getController(MainPage.LIST_LABEL).getValue();
-    int selectedGoal1 = (int) cp5.getController(MainPage.GOAL_LABEL).getValue();
+    int selectedStadium1 = (int) cp5.getController(MainPage.STADIUM_LIST_LABEL).getValue();
+    int selectedGoal1 = (int) cp5.getController(MainPage.GOAL_LIST_LABEL).getValue();
 
     if (selectedStadium1 >= 0) {
       game.start();
