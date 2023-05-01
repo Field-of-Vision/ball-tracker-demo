@@ -94,13 +94,13 @@ void controlEvent(ControlEvent theEvent) {
       visible = login;
       return;
       
-    case MainPage.LIST_LABEL:
+    case MainPage.STADIUM_LIST_LABEL:
       if (visible != menu) {
         return;
       }
 
-      int selectedStadium = (int) cp5.getController(MainPage.LIST_LABEL).getValue();
-      menu.onClickList(selectedStadium);
+      int selectedStadium = (int) cp5.getController(MainPage.STADIUM_LIST_LABEL).getValue();
+      menu.onClickStadiumList(selectedStadium);
       return;
 
     case MainPage.START_LABEL:

@@ -89,12 +89,12 @@ public class MainPage extends Page {
 
     if (selectedStadiumList >= 0) {
       game.start();
-      goal.hide();
+      // goal.hide();
       visible = game;
     } else if (selectedGoalList >= 0) {
-      goal.start();
+      // goal.start();
       game.hide();
-      visible = goal;
+      // visible = goal;
     }
     return;
   }
