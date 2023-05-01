@@ -12,10 +12,8 @@ void webConnect(String uri) {
     return;
   }
 
-  url = uri;
   wsc = new WebsocketClient(this, uri);
-  print("uri: ");
-  println(uri);
+  println("uri: " + uri);
   println(this);
 }
 
