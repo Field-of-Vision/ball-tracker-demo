@@ -8,7 +8,7 @@ public class GoalPage extends Page {
   String action, goal_name, url;
   int pass, home, away, out, possession, goal, tutorial;
   int t, x, y, p, pa, g;
-  int selectedImage;
+  int selectedGoal;
 
   int counter, json_array_size;
   String json_filename;
@@ -21,24 +21,19 @@ public class GoalPage extends Page {
   GoalPage() {
     time = millis();
     timestamp = 0;
-    selectedImage = -1;
+    selectedGoal = -1;
     counter = 0;
-    json_filename = "data/match1.json";
-    json_file = loadJSONObject(json_filename);
-    json_array = json_file.getJSONArray("data");
-    json_array_size = json_array.size();
   }
     /**
     * Sets the AWS endpoint for the given goal
     * 
     * @param url: the AWS endpoint
     * @param _goal: the go  al name (format to be determined)
-    * @selectedImage : the index of the image to be displayed (TODO: will probs remove this!)
+    * @selectedGoal : the index of the goal to be displayed (TODO: will probs remove this!) (i.e. its position in the list!)
     */
-  void setGoal(String url, String _goal, int selectedImage) {
+  void setGoal(String url, String _goal, int selectedGoal) {
     this.url = url;
     this.goal_name = _goal;
-    this.selectedImage = selectedImage;
 
     switch(url) {
     case DALYMOUNT_PARK:
@@ -52,20 +47,33 @@ public class GoalPage extends Page {
       this.action = "mcg_AUS_sendMessage";
       break;
     }
+
+    switch(selectedGoal) {
+    case 0:
+      this.json_filename = "data/match1.json";
+      println("goalPage: match1.json");
+      break;
+    case 1:
+      this.json_filename = "data/match2.json";
+      println("goalPage: match2.json");
+      break;
+    case 2:
+      this.json_filename = "data/match3.json";
+      println("goalPage: match3.json");
+      break;
+    }
+
+    // TODO: this isn't neat, but load the json file once we have it here
+    println("beginning to load json file");
+    json_file = loadJSONObject(json_filename);
+    json_array = json_file.getJSONArray("data");
+    json_array_size = json_array.size();
   }
 
   String toJsonRequest() {
     if (action == null) {
       println("Can't send message to the server before setting the stadium");
     }
-
-    // action = "hello";
-    // mouseX = 0;
-    // mouseY = 0;
-    // possession = 1;
-    // pass = 1;
-    // goal = 1;
-    // tutorial = 1;
 
     if (counter >= json_array_size) {
       // We have finished the goal. 
