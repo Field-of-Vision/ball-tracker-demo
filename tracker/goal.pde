@@ -80,7 +80,7 @@ public class GoalPage extends Page {
     background(255);
 
     // Hide other elements on the main page
-    cp5.getController(MainPage.LIST_LABEL).hide();
+    cp5.getController(MainPage.STADIUM_LIST_LABEL).hide();
     cp5.getController(MainPage.START_LABEL).hide();
     cp5.getController(MainPage.LOGIN_LABEL).hide();
     textSize(20);
