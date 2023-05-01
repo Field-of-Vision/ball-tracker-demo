@@ -15,6 +15,7 @@ Robot robot;
 PImage goal_img;
 
 GamePage game;
+GoalPage goal;  
 MainPage menu;
 LoginPage login;
 LeavePage leave;
@@ -44,11 +45,12 @@ void setup() {
   }
 
   game = new GamePage();
+  goal = new GoalPage();
   menu = new MainPage();
   login = new LoginPage();
   leave = new LeavePage();
 
-  addPages(game, menu, login, leave);
+  addPages(game, menu, login, leave, goal);
   visible = menu;
 
   ball[0] = loadImage(dataPath(FIG_PATH) + File.separator + "Soccer.png");
@@ -81,11 +83,22 @@ void controlEvent(ControlEvent theEvent) {
    the controlEvent method. by checking the name of a controller one can 
    distinguish which of the controllers has been changed.
    */
+
+  // TODO: David's code... its messy but should work for selecting the goal page
+  // if (theEvent.isAssignableFrom(ListBox.class)) {
+  //   if (theEvent.getName().equals("Goal Selector:")) {
+  //     int selectedGoal = (int) theEvent.getValue();
+  //     menu.onClickGoalList(selectedGoal);
+  //     visible = goal; // set the visible page to the goal page
+  //   }
+  // }
+
   if (!theEvent.isController()) { 
     return;
   }
   
   switch(theEvent.getController().getName()) {
+
     case MainPage.LOGIN_LABEL:
       if (visible != menu) {
         return;
@@ -101,6 +114,15 @@ void controlEvent(ControlEvent theEvent) {
 
       int selectedStadium = (int) cp5.getController(MainPage.STADIUM_LIST_LABEL).getValue();
       menu.onClickStadiumList(selectedStadium);
+      return;
+
+    case MainPage.GOAL_LIST_LABEL:
+      if (visible != menu){
+        return;
+      }
+
+      int selectedGoal= (int) cp5.getController(MainPage.GOAL_LIST_LABEL).getValue();
+      menu.onClickGoalList(selectedGoal);
       return;
 
     case MainPage.START_LABEL:
