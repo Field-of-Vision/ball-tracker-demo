@@ -19,6 +19,8 @@
 
 * J, K, L for Audio Tutorial for devices 1, 2, and 3 respectively
 
+Press E to save the current session as a JSON-ish file 
+
 ### Dependencies
 
 * [Processing](https://processing.org/)
