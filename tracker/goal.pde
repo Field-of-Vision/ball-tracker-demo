@@ -7,6 +7,8 @@ public class GoalPage extends Page {
   int pass, home, away, out, possession, goal, tutorial;
   int selectedImage;
 
+  String temp;
+
   GoalPage() {
     time = millis();
     timestamp = 0;
@@ -51,16 +53,10 @@ public class GoalPage extends Page {
     goal = 1;
     tutorial = 1;
 
-    // Temporarily commenting out just to see if I can hardcode something
-    // return "{\"action\": \"" + action + "\", \"message\": {\"T\":" +
-    //   String.format("%.02f", timestamp) + ",\"X\":" +
-    //   mouseX/15 + ",\"Y\":" +
-    //   mouseY/15 + ",\"P\":" +
-    //   possession + ",\"Pa\":" +
-    //   pass + ",\"G\":" +
-    //   goal + ",\n\"T\":" +
-    //   tutorial + "}}";
-    return "{\"action\" : \"yolo\", \"message\": {\"x\": \"3\"}}";
+    // Temporarily commenting out just to see if I can hardcode something 
+    // TODO: rename action to lambda_function or similar (its dalymount_IRL_sendMessage for example atm)
+  
+    return "{\"action\" : \"dalymount_IRL_sendMessage\", \"message\": {\"x\": \"3\"}}";
   }
 
   void show() {
