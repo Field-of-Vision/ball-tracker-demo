@@ -43,6 +43,7 @@ void webThread() {
   for(;;) {
     String head = requests.poll();
     
+    // Checks if there are messages to be sent in the requests queue
     if(head == null) {
       delay(100);
       continue;
